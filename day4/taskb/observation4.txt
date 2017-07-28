@@ -1,0 +1,6 @@
+one producer and multiple consumers
+
+no of producers:1
+no of consumers:3
+
+randomly one out of the three consumers will be active for some time

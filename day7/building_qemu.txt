@@ -1,0 +1,45 @@
+//both source and destination must have >4.3 kernel and qemu>2.5
+//use these to download and install qemu
+    sudo su
+    cd /usr/local/
+    rm -R qemu/
+    git clone git://git.qemu-project.org/qemu.git
+    cd qemu
+    git submodule init
+    git submodule update --recursive
+    git submodule status --recursive
+    git checkout stable-2.8
+    mkdir build
+    cd build
+    apt-get --no-install-recommends -y build-dep qemu
+    ../configure --enable-debug --target-list="x86_64-softmmu" --prefix=/usr/local/qemu/
+    make
+    make install
+    exit
+    sudo vim ~/.profile (ADD:"export PATH=/usr/local/qemu/bin/:$PATH")
+    source ~/.profile
+    
+//source (make sure source and destination are in same subnet and both have same home directory mounted from nfs)
+
+	sudo -i  qemu-system-x86_64 -hda /home/abhijith/vm-img/omega.qcow2 -m 8096 -boot c -smp 6 -net nic -net tap,ifname=qtap8,script=no,downscript=no  -vnc :7 -usbdevice tablet -enable-kvm
+	
+//destination
+	
+	sudo -i qemu-system-x86_64 -hda /home/abhijith/vm-img/omega.qcow2 -m 8096 -boot c -smp 6 -net nic -net tap,ifname=qtap0,script=no,downscript=no -incoming tcp:0:4444 -enable-kvm -vnc :1 -usbdevice tablet
+	
+//local machine to view
+	vncviewer 10.128.0.34:7
+	vncviewer 10.128.0.35:1
+
+//source qemu console
+	precopy: 
+		migrate -d tcp:10.128.0.35:4444
+		
+	postcopy:
+		migrate_set_capability x-postcopy-ram on
+		migrate -d tcp:10.128.0.35:4444
+		migrate_start_postcopy
+		
+	
+	
+	postcopy-ram

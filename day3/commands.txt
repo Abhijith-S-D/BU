@@ -1,0 +1,49 @@
+//to compile a kernel module
+make -C /lib/modules/$(uname -r)/build M=$PWD clean
+make -C /lib/modules/$(uname -r)/build M=$PWD modules
+sudo insmod module_name.ko //to add module to kernel space
+//open in other terminal sudo tail -f /var/log/syslog to view
+sudo rmmod module_name //to remove module from kernel space
+
+lsmod // to view all currently running modules
+
+//  /lib/modules/$(uname -r)/build/include/linux/*.h "this is the place to view all prototypes"
+// cat proc/devices "lists all devices"
+
+sudo mknod -m 666 /dev/process_list c 164 0
+
+cat /dev/process_list //to read from char device
+
+echo "hello" > /dev/process_list //to write into char dev
+
+
+sudo qemu-system-x86_64 -hda omega.qcow2 -m 8096 -boot c -smp 4 -cpu host -netdev user,id=vmnic -device virtio-net,netdev=vmnic -vnc :1 -usbdevice tablet -enable-kvm //without qtap
+sudo qemu-system-x86_64 -hda omega.qcow2 -m 8096 -boot c -smp 4 -net nic -net tap,ifname=qtap0,script=no,downscript=no -vnc :1 -usbdevice tablet -enable-kvm //with qtap
+
+st=task->state;
+char msg[1000];
+if(st&TASK_RUNNING)
+	strcat(msg,"TASK_RUNNING, ");
+if(st&TASK_INTERRUPTIBLE)
+	strcat(msg,"TASK_INTERRUPTIBLE, ");
+if(st&TASK_UNINTERRUPTIBLE)
+	strcat(msg,"TASK_UNINTERRUPTIBLE, ");
+if(st&__TASK_STOPPED)
+	strcat(msg,"__TASK_STOPPED, ");
+if(st&__TASK_TRACED)
+	strcat(msg,"__TASK_TRACED, ");
+if(st&TASK_DEAD)
+	strcat(msg,"TASK_DEAD, ");
+if(st&TASK_WAKEKILL)
+	strcat(msg,"TASK_WAKEKILL, ");
+if(st&TASK_WAKING)
+	strcat(msg,"TASK_WAKING, ");
+if(st&TASK_PARKED)
+	strcat(msg,"TASK_PARKED, ");
+if(st&TASK_NOLOAD)
+	strcat(msg,"TASK_NOLOAD, ");
+if(st&2048)
+	strcat(msg,"TASK_NEW, ");
+if(st&TASK_STATE_MAX)
+	strcat(msg,"TASK_STATE_MAX, ");
+strcat(msg,"\0");

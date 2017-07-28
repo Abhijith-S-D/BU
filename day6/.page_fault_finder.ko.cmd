@@ -1,0 +1,1 @@
+cmd_/home/omega/git/BU/day6/page_fault_finder.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /home/omega/git/BU/day6/page_fault_finder.ko /home/omega/git/BU/day6/page_fault_finder.o /home/omega/git/BU/day6/page_fault_finder.mod.o

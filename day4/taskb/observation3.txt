@@ -1,0 +1,5 @@
+one consumer and multiple producers
+
+number of producers:3
+number of consumers:1
+all three producers write to pipe but their order is random 

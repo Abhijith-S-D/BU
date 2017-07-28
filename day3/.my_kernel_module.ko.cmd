@@ -1,0 +1,1 @@
+cmd_/home/omega/git/BU/day3/my_kernel_module.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /home/omega/git/BU/day3/my_kernel_module.ko /home/omega/git/BU/day3/my_kernel_module.o /home/omega/git/BU/day3/my_kernel_module.mod.o

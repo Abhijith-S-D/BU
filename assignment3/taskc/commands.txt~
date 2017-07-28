@@ -1,0 +1,54 @@
+//to compile a kernel module
+make -C /lib/modules/$(uname -r)/build M=$PWD clean
+make -C /lib/modules/$(uname -r)/build M=$PWD modules
+sudo insmod module_name.ko //to add module to kernel space
+//open in other terminal sudo tail -f /var/log/syslog to view
+sudo rmmod module_name //to remove module from kernel space
+
+lsmod // to view all currently running modules
+
+//  /lib/modules/$(uname -r)/build/include/linux/*.h "this is the place to view all prototypes"
+// cat proc/devices "lists all devices"
+
+sudo mknod -m 666 /dev/linepipe c 164 0
+
+cat /dev/process_list //to read from char device
+
+echo "hello" > /dev/process_list //to write into char dev
+
+
+sudo qemu-system-x86_64 -hda omega.qcow2 -m 8096 -boot c -smp 4 -cpu host -netdev user,id=vmnic -device virtio-net,netdev=vmnic -vnc :1 -usbdevice tablet -enable-kvm //without qtap
+sudo qemu-system-x86_64 -hda omega.qcow2 -m 8096 -boot c -smp 6 -net nic -net tap,ifname=qtap0,script=no,downscript=no -vnc :1 -usbdevice tablet -enable-kvm //with qtap
+
+Line read: Bytes read: 100
+Line read: Bytes read: 100
+Line read: Bytes read: 100
+Line read: Bytes read: 100
+Line read: Bytes read: 100
+Line read: Bytes read: 100
+Line read: Bytes read: 100
+Line read: Bytes read: 100
+Line read: Bytes read: 100
+Line read: Bytes read: 100
+Line read: Bytes read: 100
+Line read: Bytes read: 100
+Line read: Bytes read: 100
+Line read: Bytes read: 100
+Line read: Bytes read: 100
+Line read: Bytes read: 100
+Line read: Bytes read: 100
+Line read: Bytes read: 100
+Line read: Bytes read: 100
+Line read: Bytes read: 100
+Line read: Bytes read: 100
+Line read: Bytes read: 100
+Line read: Bytes read: 100
+Line read: Bytes read: 100
+Line read: Bytes read: 100
+Line read: Bytes read: 100
+Line read: Bytes read: 100
+Line read: Bytes read: 100
+Line read: Bytes read: 100
+Line read: Bytes read: 100
+Line read: Bytes read: 100
+Line read: Bytes read: 100

@@ -1,0 +1,7 @@
+multiple producers and multiple consumers
+
+no of producers:2
+no of consumers:2
+
+randomly both consumers read data written to pipe
+and randomly 

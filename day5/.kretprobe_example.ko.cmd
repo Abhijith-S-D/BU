@@ -1,0 +1,1 @@
+cmd_/home/omega/git/BU/day5/kretprobe_example.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /home/omega/git/BU/day5/kretprobe_example.ko /home/omega/git/BU/day5/kretprobe_example.o /home/omega/git/BU/day5/kretprobe_example.mod.o

@@ -1,0 +1,3 @@
+kernel//home/omega/git/BU/day5/kprobe_example.ko
+kernel//home/omega/git/BU/day5/jprobe_example.ko
+kernel//home/omega/git/BU/day5/kretprobe_example.ko
